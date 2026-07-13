@@ -1354,16 +1354,21 @@
                 a.innerText = d.name;
                 a.className = "download-button " + (i % 2 === 0 ? "option-1" : "option-2");
 
-                if(!isDirect) {
+                                if(!isDirect) {
                     a.onclick = (e) => { 
                         e.preventDefault(); 
                         if (currentLinkType === 'ads') {
                             window.startAdUnlockModal(d.link);
                         } else {
-                            window.startDownloadTimer(d.link); 
+                            let finalLink = d.link;
+                            if (currentLinkType === 'cuty' && !d.link.includes('cuty.io')) {
+                                finalLink = 'https://cuty.io/quick?token=58931b72592eb5b4a6c9921e7&url=' + encodeURIComponent(d.link);
+                            }
+                            window.startDownloadTimer(finalLink); 
                         }
                     };
                 }
+
 
                 dlContainer.appendChild(a);
             });
@@ -1399,7 +1404,7 @@
                     a.style.fontWeight = "bold";
                                        a.style.color = (i % 2 === 0) ? "var(--color-neon-lime)" : "var(--color-neon-cyan)";
                                                                                               const isDirectOld = (app.showAdModal === false && app.downloadType !== 'ads');
-                    if(isDirectOld) {
+                                        if(isDirectOld) {
                         a.href = v.link;
                         a.target = "_blank";
                     } else {
@@ -1408,7 +1413,11 @@
                             if (app.downloadType === 'ads') {
                                 window.startAdUnlockModal(v.link);
                             } else {
-                                window.startDownloadTimer(v.link); 
+                                let finalLink = v.link;
+                                if (app.downloadType === 'cuty' && !v.link.includes('cuty.io')) {
+                                    finalLink = 'https://cuty.io/quick?token=58931b72592eb5b4a6c9921e7&url=' + encodeURIComponent(v.link);
+                                }
+                                window.startDownloadTimer(finalLink); 
                             }
                         };
                     }
@@ -2384,4 +2393,4 @@ window.open('https://omg10.com/4/10744381', '_blank');
         });
     </script>
 </body>
-</html>
+    </html>
