@@ -55,7 +55,8 @@
     #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
 
     /* --- HEADER SUPERIOR --- */
-    .playstore-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 15px 5px 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+       .playstore-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 15px 5px 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); transform: translateZ(0); will-change: transform; }
+
     .search-bar-container { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 10px; }
     .search-input-fake { flex-grow: 1; background: rgba(255,255,255,0.1); height: 40px; border-radius: 25px; display: flex; align-items: center; padding: 0 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2); border:none; }
     .search-input-fake input { background: transparent; border: none; color: white; width: 100%; font-size: 13px; outline: none; }
@@ -460,14 +461,12 @@
                <span class="admin-group-label">ENLACES DE DESCARGA</span>
             <div id="admin-downloads-container"></div>
             <button onclick="addDownloadInput('DESCARGA RECOMENDABLE', '')" style="background:#333; color:#fff; border:none; padding:8px; border-radius:5px; width:100%; cursor:pointer; font-size:11px; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> AÑADIR OTRO BOTÓN</button>
-                       <div style="display:flex; align-items:center; margin-bottom:10px; gap:10px; background: rgba(0,224,255,0.05); padding: 10px; border-radius: 5px;">
-                <input type="checkbox" id="app-show-ad-modal" checked style="width:auto; margin:0; cursor:pointer;">
-                <label for="app-show-ad-modal" style="font-size:12px; color:#fff; cursor:pointer;">Activar ventana emergente de publicidad en la descarga</label>
-            </div>
-            <span class="admin-group-label">TIPO DE DESCARGA</span>
-            <div style="display:flex; gap:10px; margin-bottom:15px; border-bottom: 1px solid #333; padding-bottom: 15px;">
-                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="cuty" checked> Link Cuty (Temporizador)</label>
-                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="ads"> Desbloqueo con Anuncios</label>
+                      
+                        <span class="admin-group-label">TIPO DE DESCARGA</span>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px; border-bottom: 1px solid #333; padding-bottom: 15px;">
+                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="ads" checked> 3 Publicidades (1 Minuto)</label>
+                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="cuty"> Link Cuty</label>
+                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="shortener"> Acortador Aparte</label>
             </div>
 
             <span class="admin-group-label">VERSIONES ANTERIORES</span>
@@ -619,13 +618,14 @@
                   <section id="ad-container-1" style="width: 100%; max-width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin: 0 auto 30px auto; padding: 0;">
                 <script>
 
-                  atOptions = {
+                                   atOptions = {
                     'key' : '2dadc3f24cddfa328c09567aff61d8fc',
                     'format' : 'iframe',
-                    'height' : 50,
+                    'height' : 90,
                     'width' : 320,
                     'params' : {}
                   };
+
                 </script>
                 <script src="https://www.highperformanceformat.com/2dadc3f24cddfa328c09567aff61d8fc/invoke.js"></script>
             </section>
@@ -705,13 +705,14 @@
                         <div style="width: 100%; max-width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin: 0 auto 20px auto; padding: 0;">
                 <script>
 
-                  atOptions = {
+                                   atOptions = {
                     'key' : '2dadc3f24cddfa328c09567aff61d8fc',
                     'format' : 'iframe',
-                    'height' : 50,
+                    'height' : 90,
                     'width' : 320,
                     'params' : {}
                   };
+
                 </script>
                 <script src="https://www.highperformanceformat.com/2dadc3f24cddfa328c09567aff61d8fc/invoke.js"></script>
             </div>
@@ -803,7 +804,7 @@
                               atOptions = {
                                 'key' : '2dadc3f24cddfa328c09567aff61d8fc',
                                 'format' : 'iframe',
-                                'height' : 50,
+                                'height' : 90,
                                 'width' : 320,
                                 'params' : {}
                               };
@@ -830,7 +831,7 @@
                                   atOptions = {
                                     'key' : '2dadc3f24cddfa328c09567aff61d8fc',
                                     'format' : 'iframe',
-                                    'height' : 50,
+                                    'height' : 90,
                                     'width' : 320,
                                     'params' : {}
                                   };
@@ -961,7 +962,7 @@
                                   atOptions = {
                                     'key' : '2dadc3f24cddfa328c09567aff61d8fc',
                                     'format' : 'iframe',
-                                    'height' : 50,
+                                    'height' : 90,
                                     'width' : 320,
                                     'params' : {}
                                   };
@@ -1147,12 +1148,11 @@
         <p style="font-size:11px; color:#aaa; margin-bottom:10px;">⚠️ Los acortadores se utilizan para darle mantenimiento a est sito web y poder seguir dandoles apps</p>
         <p style="font-size:12px; color:var(--neon-green); font-weight:bold; margin-bottom:15px;">No te olvides comentar o suscribirte si te funciono saludos</p>
         
-                            <div style="font-size:42px; font-weight:900; color:var(--neon-green); margin-bottom:5px; text-shadow: 0 0 15px var(--neon-green);" id="dl-countdown">10</div>
+                                                      <div style="font-size:42px; font-weight:900; color:var(--neon-green); margin-bottom:5px; text-shadow: 0 0 15px var(--neon-green);" id="dl-countdown">60</div>
 
-<p style="font-size:13px; color:var(--neon-blue); font-weight:bold; margin-bottom: 0;">Redirigiendo en <span id="dl-countdown-text">10</span>...</p>
+<p style="font-size:13px; color:var(--neon-blue); font-weight:bold; margin-bottom: 0;">Redirigiendo en <span id="dl-countdown-text">60</span> segundos...</p>
 
     </div>
-
     <div class="menu-overlay" id="dl-overlay" style="z-index: 3999;"></div>
         <div id="ad-unlock-modal" class="admin-modal" style="max-width: 350px; top: 50%; text-align: center; z-index: 4000; border-color: var(--neon-purple); padding: 25px 20px;">
         <i class="fa-solid fa-xmark" style="color:#fff; font-size:20px; cursor:pointer; position:absolute; top:15px; right:15px;" onclick="document.getElementById('ad-unlock-modal').style.display='none'; document.getElementById('dl-overlay').classList.remove('active');"></i>
