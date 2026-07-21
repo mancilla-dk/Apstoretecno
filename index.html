@@ -470,6 +470,7 @@
             </div>
 
             <span class="admin-group-label">VERSIONES ANTERIORES</span>
+            <button type="button" onclick="window.moveToOldVersions()" style="background:#ffaa00; color:#000; border:none; padding:8px; border-radius:5px; width:100%; cursor:pointer; font-size:11px; margin-bottom:15px; font-weight:bold;"><i class="fa-solid fa-arrow-down"></i> MOVER ENLACES ACTUALES A VERSIONES ANTERIORES</button>
             <div style="display:flex; align-items:center; margin-bottom:10px; gap:10px;">
                 <input type="checkbox" id="app-ver-old-active" style="width:auto; margin:0; cursor:pointer;" onchange="document.getElementById('old-ver-container').style.display = this.checked ? 'block' : 'none'">
                 <label for="app-ver-old-active" style="font-size:12px; color:#fff; cursor:pointer;">Activar Versión Anterior</label>
@@ -1158,7 +1159,7 @@
         <i class="fa-solid fa-xmark" style="color:#fff; font-size:20px; cursor:pointer; position:absolute; top:15px; right:15px;" onclick="document.getElementById('ad-unlock-modal').style.display='none'; document.getElementById('dl-overlay').classList.remove('active');"></i>
         <h3 style="color:var(--neon-purple); border:none; margin-bottom:15px; font-size: 16px;"><i class="fa-solid fa-unlock-keyhole"></i> DESBLOQUEAR DESCARGA</h3>
               <p style="font-size:13px; color:#fff; margin-bottom:10px; line-height: 1.4;">Para obtener tu enlace directo a <b>MediaFire</b>, completa los 3 pasos de publicidad.</p>
-        <p style="font-size:11px; color:#aaa; margin-bottom:20px;">Cada paso dura solo 15 segundos. Al finalizar, el candado se abrirá.</p>
+        <p style="font-size:11px; color:#aaa; margin-bottom:20px;">Los primeros dos pasos duran 30 segundos y el último 1 minuto. Al finalizar, el candado se abrirá.</p>
         
         <button id="btn-ad-step-1" onclick="executeAdStep(1)" style="width:100%; padding:12px; margin-bottom:10px; background:var(--neon-blue); color:#000; font-weight:bold; border:none; border-radius:5px; cursor:pointer; transition:0.3s;">Paso 1: Ver Publicidad</button>
         
@@ -2097,15 +2098,16 @@ textEl.innerText = timeLeft;
             
           if (step === 1) {
 window.open('https://www.effectivegatecpm.com/bju7faig6?key=d4c087ca3524b4bee6f6c8bd9e5c8d9e', '_blank');
-                const btn = document.getElementById('btn-ad-step-1');
+                                const btn = document.getElementById('btn-ad-step-1');
                 btn.disabled = true;
                 btn.style.cursor = 'not-allowed';
                 btn.style.background = '#333';
                 btn.style.color = '#666';
                 
-                let time = 15;
+                let time = 30;
                 const timer = setInterval(() => {
                     btn.innerText = `Completando en ${time}s...`;
+
                     time--;
                     if(time < 0) {
                         clearInterval(timer);
@@ -2123,13 +2125,13 @@ window.open('https://www.effectivegatecpm.com/bju7faig6?key=d4c087ca3524b4bee6f6
             } 
             else if (step === 2) {
 window.open('https://ukuleqasforsalesre.com?tid=1248841', '_blank');
-                const btn = document.getElementById('btn-ad-step-2');
+                                const btn = document.getElementById('btn-ad-step-2');
                 btn.disabled = true;
                 btn.style.cursor = 'not-allowed';
                 btn.style.background = '#333';
                 btn.style.color = '#666';
                 
-                let time = 15;
+                let time = 30;
                 const timer = setInterval(() => {
                     btn.innerText = `Completando en ${time}s...`;
                     time--;
@@ -2149,13 +2151,13 @@ window.open('https://ukuleqasforsalesre.com?tid=1248841', '_blank');
             }
             else if (step === 3) {
 window.open('https://omg10.com/4/10744381', '_blank');
-                const btn = document.getElementById('btn-ad-step-3');
+                               const btn = document.getElementById('btn-ad-step-3');
                 btn.disabled = true;
                 btn.style.cursor = 'not-allowed';
                 btn.style.background = '#333';
                 btn.style.color = '#666';
                 
-                let time = 15;
+                let time = 60;
                 statusEl.innerText = 'Desbloqueando acceso seguro...';
                 const timer = setInterval(() => {
                     btn.innerText = `Revelando enlace en ${time}s...`;
@@ -2215,7 +2217,26 @@ window.open('https://omg10.com/4/10744381', '_blank');
             `;
             container.appendChild(div);
         };
-               
+                   window.moveToOldVersions = function() {
+            const currentDownloads = document.getElementById('admin-downloads-container').children;
+            if(currentDownloads.length === 0) {
+                showToast("No hay enlaces para mover", true);
+                return;
+            }
+            
+            document.getElementById('app-ver-old-active').checked = true;
+            document.getElementById('old-ver-container').style.display = 'block';
+            
+            Array.from(currentDownloads).forEach(div => {
+                const name = div.querySelector('.dyn-dl-name').value;
+                const link = div.querySelector('.dyn-dl-link').value;
+                if(name.trim() !== "" || link.trim() !== "") {
+                    window.addOldVersionInput(name + " (Anterior)", link);
+                }
+            });
+            showToast("Enlaces copiados a versiones anteriores");
+        };
+    
                 window.addOldVersionInput = function(name = "", link = "") {
             const container = document.getElementById('admin-old-versions-container');
             const div = document.createElement('div');
