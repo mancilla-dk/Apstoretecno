@@ -300,6 +300,12 @@
     .blogger-wrapper-final .screenshot-item.right { z-index: 5; opacity: 0.5; filter: blur(2px); transform: translate3d(calc(-50% + 140px), -50%, 0) scale(0.85); }
     .blogger-wrapper-final .screenshot-item.hidden-left { opacity: 0; transform: translate3d(calc(-50% - 300px), -50%, 0) scale(0.6); }
     .blogger-wrapper-final .screenshot-item.hidden-right { opacity: 0; transform: translate3d(calc(-50% + 300px), -50%, 0) scale(0.6); }
+    /* Estilos para carrusel horizontal */
+    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item { width: 320px; height: 180px; }
+    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.left { transform: translate3d(calc(-50% - 200px), -50%, 0) scale(0.85); }
+    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.right { transform: translate3d(calc(-50% + 200px), -50%, 0) scale(0.85); }
+    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.hidden-left { transform: translate3d(calc(-50% - 350px), -50%, 0) scale(0.6); }
+    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.hidden-right { transform: translate3d(calc(-50% + 350px), -50%, 0) scale(0.6); }
 
     .blogger-wrapper-final .video-container {
         position: relative; width: 100%; padding-bottom: 56.25%; height: 0; margin-top: 10px; margin-bottom: 20px;
@@ -336,11 +342,21 @@
     }
     .blogger-wrapper-final .download-button:last-child { margin-bottom: 0; }
     .blogger-wrapper-final .download-button:hover { transform: translateY(-2px); }
-            .blogger-wrapper-final .download-button.option-1 { background-color: var(--color-neon-cyan); color: #000000; box-shadow: 0 0 15px var(--color-neon-cyan); border: 2px solid var(--color-neon-cyan); }
-    .blogger-wrapper-final .download-button.option-2 { background-color: var(--color-neon-lime); color: #000000; box-shadow: 0 0 15px var(--color-neon-lime); border: 2px solid var(--color-neon-lime); }
+                                                
+       .blogger-wrapper-final .download-button.option-1 { background: linear-gradient(135deg, #00ffaa 0%, #000000 100%) !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(0, 255, 170, 0.5) !important; border: 2px solid var(--neon-green) !important; }
+    .blogger-wrapper-final .download-button.option-2 { background: var(--color-neon-cyan) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-cyan) !important; border: 2px solid var(--color-neon-cyan) !important; }
+    .blogger-wrapper-final .download-button.option-3 { background: var(--color-neon-lime) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-lime) !important; border: 2px solid var(--color-neon-lime) !important; }     
 
-    .blogger-wrapper-final .download-button.option-3 { background-color: var(--color-neon-cyan); color: #000000; box-shadow: 0 0 15px var(--color-neon-cyan); }
-    
+    /* Ajuste dinámico con CSS: Si el botón 3 no está o está oculto (solo hay 2 botones), reasignamos los colores */
+    .app-download-buttons:has(#btn-download-3[style*="none"]) .download-button.option-1,
+    .app-download-buttons:not(:has(#btn-download-3)) .download-button.option-1 {
+        background: var(--color-neon-cyan) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-cyan) !important; border: 2px solid var(--color-neon-cyan) !important;
+    }
+    .app-download-buttons:has(#btn-download-3[style*="none"]) .download-button.option-2,
+    .app-download-buttons:not(:has(#btn-download-3)) .download-button.option-2 {
+        background: var(--color-neon-lime) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-lime) !important; border: 2px solid var(--color-neon-lime) !important;
+    }
+
     /* Clases para resaltar texto como en el ejemplo */
     .hl-red { color: #ff0000; font-weight: 900; }
     .hl-white { color: #ffffff; font-weight: 900; }
@@ -458,15 +474,15 @@
                                    
             <span class="admin-group-label">INSTRUCCIONES INSTALACIÓN</span>
             <textarea id="app-install-steps" rows="5" placeholder="Pasos de instalación (Dejar vacío para usar predeterminado)"></textarea>
-               <span class="admin-group-label">ENLACES DE DESCARGA</span>
+                             <span class="admin-group-label">ENLACES DE DESCARGA</span>
             <div id="admin-downloads-container"></div>
-            <button onclick="addDownloadInput('DESCARGA RECOMENDABLE', '')" style="background:#333; color:#fff; border:none; padding:8px; border-radius:5px; width:100%; cursor:pointer; font-size:11px; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> AÑADIR OTRO BOTÓN</button>
+            <button onclick="const totalBtns = document.querySelectorAll('#admin-downloads-container input[type=\'text\']').length / 2; const nextTitle = totalBtns === 0 ? 'DESCARGA RECOMENDABLE' : (totalBtns === 1 ? 'DESCARGA ALTERNATIVO' : 'DESCARGA ALTERNATIVO ' + (totalBtns + 1)); if(typeof addDownloadInput === 'function') { addDownloadInput(nextTitle, ''); }" style="background:#333; color:#fff; border:none; padding:8px; border-radius:5px; width:100%; cursor:pointer; font-size:11px; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> AÑADIR OTRO BOTÓN</button>
                       
                         <span class="admin-group-label">TIPO DE DESCARGA</span>
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px; border-bottom: 1px solid #333; padding-bottom: 15px;">
                 <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="ads" checked> 3 Publicidades (1 Minuto)</label>
                 <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="cuty"> Link Cuty</label>
-                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="shortener"> Acortador Aparte</label>
+                <label style="color:#fff; font-size:12px; cursor:pointer;"><input type="radio" name="app-download-type" value="shortener"> Descarga Directa (Acortador)</label>
             </div>
 
             <span class="admin-group-label">VERSIONES ANTERIORES</span>
@@ -665,7 +681,13 @@
                     <div class='card-details'><h3>FOTOGRAFÍA</h3><p>Filtros Premium</p></div>
                     <div class='card-action'><span>ABRIR</span></div>
                 </a>
-                
+                                <div style="grid-column: 1 / -1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin: 10px auto; padding: 0;">
+                    <script>
+                        atOptions = { 'key' : '2dadc3f24cddfa328c09567aff61d8fc', 'format' : 'iframe', 'height' : 90, 'width' : 320, 'params' : {} };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/2dadc3f24cddfa328c09567aff61d8fc/invoke.js"></script>
+                </div>
+
                 <a class='store-card neon-orange' href='#' onclick="filterApps('Juegos')">
                     <div class='card-icon'><i class='fa-solid fa-gamepad'></i></div>
                     <div class='card-details'><h3>JUEGOS MOD</h3><p>Dinero Ilimitado</p></div>
@@ -691,18 +713,17 @@
                 </a>
 
             </section>
+</div>
+<div id="results-view" class="view-section">
+    <h2 class='store-grid-title' id="results-title">Resultados <i class='fa-solid fa-layer-group'></i></h2>
+    <section class='video-section' style='margin-bottom:20px;'>
+        <h3>GUÍA DE SALTO DE PUBLICIDAD IMPORTANTE VER</h3>
+        <div class='video-container'>
+            <iframe id="results-video-2-frame" allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen='allowfullscreen' frameborder='0' src='about:blank' title='Guía de Descarga'>
+            </iframe>
         </div>
-
-        <div id="results-view" class="view-section">
-            <h2 class='store-grid-title' id="results-title">Resultados <i class='fa-solid fa-layer-group'></i></h2>
-                   <section class='video-section' style='margin-bottom:20px;'>
-                <h3>GUÍA DE SALTO DE PUBLICIDAD IMPORTANTE VER</h3>
-                <div class='video-container'>
-                    <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen='allowfullscreen' frameborder='0' src='about:blank' title='Guía de Descarga'>
-                    </iframe>
-                </div>
-            </section>
-
+    </section>
+   
                         <div style="width: 100%; max-width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin: 0 auto 20px auto; padding: 0;">
                 <script>
 
@@ -721,6 +742,51 @@
                                                <div id="loading-msg" class="loading-msg">No hay aplicaciones subidas aún.</div>
 
             <div class='blog-posts' id="apps-container"></div>
+            
+                        <script>
+                (function() {
+                    const observer = new MutationObserver((mutations) => {
+                        const container = document.getElementById('apps-container');
+                        if (container) {
+                            let appCount = 0;
+                            let index = 0;
+                            while (index < container.children.length) {
+                                const child = container.children[index];
+                                if (child.classList && child.classList.contains('ad-in-feed')) {
+                                    index++;
+                                    continue;
+                                }
+                                appCount++;
+                                index++;
+                                if (appCount % 5 === 0) {
+                                    const nextChild = container.children[index];
+                                    if (!nextChild || (nextChild.classList && !nextChild.classList.contains('ad-in-feed'))) {
+                                        const adDiv = document.createElement('div');
+                                        adDiv.className = 'ad-in-feed';
+                                        adDiv.style.cssText = 'width: 100%; display: flex; justify-content: center; align-items: center; margin: 20px auto; padding: 0;';
+                                                                                const adIframe = document.createElement('iframe');
+                                        adIframe.width = "320";
+                                        adIframe.height = "90";
+                                        adIframe.frameBorder = "0";
+                                        adIframe.scrolling = "no";
+                                        adIframe.srcdoc = "<html><head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;}</style></head><body><script>atOptions = { 'key' : '2dadc3f24cddfa328c09567aff61d8fc', 'format' : 'iframe', 'height' : 90, 'width' : 320, 'params' : {} };<" + "/script><script src='https://www.highperformanceformat.com/2dadc3f24cddfa328c09567aff61d8fc/invoke.js'><" + "/script></body></html>";
+                                        adDiv.appendChild(adIframe);
+
+                                        if (nextChild) {
+                                            container.insertBefore(adDiv, nextChild);
+                                        } else {
+                                            container.appendChild(adDiv);
+                                        }
+                                        index++;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    const targetNode = document.getElementById('apps-container');
+                    if (targetNode) { observer.observe(targetNode, { childList: true }); }
+                })();
+            </script>
 
             <button id="btn-load-more" onclick="loadMoreApps()" style="display:none; margin: 20px auto; background: rgba(0, 224, 255, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); padding: 10px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s;">VER MÁS APPS <i class="fa-solid fa-angle-down"></i></button>
 
@@ -817,8 +883,30 @@
                             <h3>VISTA PREVIA DE LA APP</h3>
                         </div>
 
-                        <div class="preview-images-carousel" id="coverflow-wrapper">
+                                                <div class="preview-images-carousel" id="coverflow-wrapper">
                             </div>
+                        <script>
+                            // Auto-ajustar orientación del carrusel basado en la proporción de la imagen
+                            const checkCarouselOrientation = () => {
+                                const wrapper = document.getElementById('coverflow-wrapper');
+                                if(wrapper) {
+                                    const img = wrapper.querySelector('.screenshot-item img');
+                                    if(img) {
+                                        const updateOrientation = () => {
+                                            if(img.naturalWidth > img.naturalHeight) {
+                                                wrapper.classList.add('horizontal-mode');
+                                            } else {
+                                                wrapper.classList.remove('horizontal-mode');
+                                            }
+                                        };
+                                        if(img.complete) updateOrientation();
+                                        else img.addEventListener('load', updateOrientation);
+                                    }
+                                }
+                            };
+                            new MutationObserver(checkCarouselOrientation).observe(document.getElementById('coverflow-wrapper'), { childList: true });
+                        </script>
+
 
                         <div class="section-title-divider">
                             <h3>DESCRIPCIÓN COMPLETA</h3>
@@ -847,9 +935,16 @@
                                 </div>
                         </div>
 
+                                                <div style="width: 100%; max-width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin: 0 auto 20px auto; padding: 0;">
+                            <script>
+                              atOptions = { 'key' : '2dadc3f24cddfa328c09567aff61d8fc', 'format' : 'iframe', 'height' : 90, 'width' : 320, 'params' : {} };
+                            </script>
+                            <script src="https://www.highperformanceformat.com/2dadc3f24cddfa328c09567aff61d8fc/invoke.js"></script>
+                        </div>
                         <div class="section-title-divider">
                              <h3>VIDEO DE INSTALACIÓN</h3>
                         </div>
+
                         <div class="video-container">
                             <iframe id="detail-video-frame" src="about:blank" allowfullscreen></iframe>
                         </div>
@@ -889,17 +984,34 @@
                         <div class="section-title-divider">
                             <h3>OPCIONES DE DESCARGA</h3>
                         </div>
-                           <div class="download-box">
-                            <div class="app-download-buttons">
+                                                     <div class="download-box">
+                                                      <div class="app-download-buttons">
                                 <a id="btn-download-rec" href="#" target="_blank" class="download-button option-1">DESCARGA RECOMENDABLE</a>
-                                <a id="btn-download-alt" href="#" target="_blank" class="download-button option-2">DESCARGAR ALTERNATIVO</a>
-                                <a id="btn-download-3" href="#" target="_blank" class="download-button option-3" style="display:none;">TERCERA OPCIÓN</a>
+                                <a id="btn-download-alt" href="#" target="_blank" class="download-button option-2">DESCARGA ALTERNATIVO</a>
+                                <a id="btn-download-3" href="#" target="_blank" class="download-button option-3" style="display:none;">DESCARGA ALTERNATIVO 2</a>
                             </div>
+
                         </div>
-                     
+            <div class="section-title-divider">
+                            <h3>TE CUESTA O NO SABES SALTAR LA PUBLICIDAD VE EL SIGUIENTE VIDEO</h3>
+                        </div>
+                                       <div class="video-container">
+                    <iframe id="detail-video-2-frame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" src="about:blank" title="Guía de Descarga Alterna"></iframe>
+                    <script>
+                        // Sincroniza automáticamente este reproductor con el Video 2 configurado desde el panel
+                        setInterval(() => {
+                            const srcVideo = document.getElementById('results-video-2-frame');
+                            const myVideo = document.getElementById('detail-video-2-frame');
+                            if (srcVideo && myVideo && srcVideo.src && srcVideo.src !== 'about:blank' && myVideo.src !== srcVideo.src) {
+                                myVideo.src = srcVideo.src;
+                            }
+                        }, 1000);
+                    </script>
+                </div>
 
                         <div class="other-versions-section">
                             <div class="other-versions-toggle accordion-toggle" onclick="toggleAccordion(this)">
+
                                 <i class="fas fa-chevron-down main-icon"></i> OTRAS VERSIONES DISPONIBLES <i class="fas fa-chevron-down toggle-icon"></i>
                             </div>
                             <div class="accordion-content">
@@ -1136,24 +1248,20 @@
             <button class="btn-save" style="background: var(--neon-red); color: #fff;" onclick="executeDeleteApp()">SÍ, ELIMINAR</button>
         </div>
     </div>
-        <div id="download-timer-modal" class="admin-modal" style="max-width: 350px; top: 50%; text-align: center; z-index: 4000; border-color: var(--neon-green); padding: 15px;">
-        <h3 style="color:var(--neon-yellow); border:none; margin-bottom:15px; font-size: 15px;"><i class="fa-solid fa-clock"></i> PREPARANDO DESCARGA</h3>
-        <p style="font-size:13px; color:var(--neon-red); font-weight:bold; margin-bottom:10px;">Ojo el siguiente sitio te llevara a un acortafor de anuncios no es ningún virus si no publicidad</p>
-        <div class="video-container" style="margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--neon-blue); box-shadow: 0 0 10px rgba(0,224,255,0.3); padding-bottom: 0; height: auto;">
-            <a id="timer-video-link" href="#" target="_blank" style="display:block;">
-                <img id="timer-video-thumb" src="" alt="Video Salto Publicidad" style="width:100%; border-radius:8px; display:block;">
-            </a>
-        </div>
-                
-        <p style="font-size:13px; color:#fff; margin-bottom:10px; line-height:1.4;">Si no sabes como saltarlo ve el siguiente video que te guiara paso a paso clic aqui</p>
-        <p style="font-size:11px; color:#aaa; margin-bottom:10px;">⚠️ Los acortadores se utilizan para darle mantenimiento a est sito web y poder seguir dandoles apps</p>
-        <p style="font-size:12px; color:var(--neon-green); font-weight:bold; margin-bottom:15px;">No te olvides comentar o suscribirte si te funciono saludos</p>
+                                <div id="download-timer-modal" class="admin-modal" style="max-width: 350px; top: 50%; text-align: center; z-index: 4000; border-color: var(--neon-green); padding: 20px;">
+        <h3 style="color:var(--neon-yellow); border:none; margin-bottom:15px; font-size: 16px;"><i class="fa-solid fa-clock"></i> PREPARANDO DESCARGA</h3>
+        <p style="font-size:13px; color:#fff; margin-bottom:10px; line-height:1.4;">Estás a punto de ser redirigido a tu enlace de descarga. <span style="color:var(--neon-red); font-weight:bold;">Este proceso es 100% seguro.</span></p>
+        <p style="font-size:11px; color:#aaa; margin-bottom:10px; line-height:1.4;">⚠️ Utilizamos los acortadores de publicidad para mantener este sitio web activo y seguir trayéndote aplicaciones premium.</p>
+        <p style="font-size:12px; color:var(--neon-blue); font-weight:bold; margin-bottom:15px; line-height:1.4;"><i class="fa-solid fa-circle-info"></i> Si te cuesta o no sabes saltar la publicidad, por favor mira el <span style="color:var(--neon-yellow);">video de ayuda</span> que se encuentra agregado abajo en los botones de descarga.</p>
         
-                                                      <div style="font-size:42px; font-weight:900; color:var(--neon-green); margin-bottom:5px; text-shadow: 0 0 15px var(--neon-green);" id="dl-countdown">60</div>
+        <div style="font-size:42px; font-weight:900; color:var(--neon-green); margin-bottom:5px; text-shadow: 0 0 15px var(--neon-green);" id="dl-countdown">60</div>
 
-<p style="font-size:13px; color:var(--neon-blue); font-weight:bold; margin-bottom: 0;">Redirigiendo en <span id="dl-countdown-text">60</span> segundos...</p>
-
+        <p style="font-size:13px; color:var(--neon-green); font-weight:bold; margin-bottom: 15px;">Redirigiendo automáticamente en <span id="dl-countdown-text">60</span> segundos...</p>
+        
+        <a id="btn-acceso-directo" href="#" target="_blank" style="display:inline-block; background:var(--neon-green); color:#000; padding:12px 20px; border-radius:5px; font-weight:bold; text-decoration:none; margin-top:10px; box-shadow: 0 0 10px var(--neon-green);"><i class="fa-solid fa-forward-step"></i> ACCESO DIRECTO (CUTY)</a>
     </div>
+
+
     <div class="menu-overlay" id="dl-overlay" style="z-index: 3999;"></div>
         <div id="ad-unlock-modal" class="admin-modal" style="max-width: 350px; top: 50%; text-align: center; z-index: 4000; border-color: var(--neon-purple); padding: 25px 20px;">
         <i class="fa-solid fa-xmark" style="color:#fff; font-size:20px; cursor:pointer; position:absolute; top:15px; right:15px;" onclick="document.getElementById('ad-unlock-modal').style.display='none'; document.getElementById('dl-overlay').classList.remove('active');"></i>
@@ -2412,6 +2520,22 @@ window.open('https://omg10.com/4/10744381', '_blank');
             }, 1000);
             
         });
+    </script>
+    <script>
+    // Inyección: Pantalla emergente para el botón de "Descarga Directa (Acortador)"
+    document.addEventListener('click', function(e) {
+        let btn = e.target.closest('.download-button');
+        if (btn) {
+            let textoBoton = btn.innerText.toUpperCase();
+            if (textoBoton.includes('DIRECTA') || textoBoton.includes('ACORTADOR')) {
+                e.preventDefault(); // Pausar redirección directa
+                let confirmacion = confirm("¡Aviso! Vas a ser redirigido a un acortador antes de obtener tu descarga directa.\n\nPor favor, completa los pasos. ¿Deseas continuar?");
+                if (confirmacion) {
+                    window.open(btn.href, btn.target || '_blank');
+                }
+            }
+        }
+    });
     </script>
 </body>
     </html>
