@@ -146,9 +146,7 @@
     details summary::after { content: '+'; font-size: 16px; color: var(--neon-blue); }
     details[open] summary::after { content: '-'; color: var(--neon-pink); }
     details p { font-size: 13px; color: #bbb; padding-bottom: 15px; line-height: 1.5; padding-left: 5px; }
-    
-    .report-btn-container { margin-top: 30px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-    .btn-report { background: var(--neon-red); color: #fff; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block; box-shadow: 0 0 15px rgba(255,51,51,0.4); transition: 0.3s; }
+        
 
     /* NAVBAR INFERIOR */
     .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; background: var(--glass-bg); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
@@ -301,12 +299,8 @@
     .blogger-wrapper-final .screenshot-item.hidden-left { opacity: 0; transform: translate3d(calc(-50% - 300px), -50%, 0) scale(0.6); }
     .blogger-wrapper-final .screenshot-item.hidden-right { opacity: 0; transform: translate3d(calc(-50% + 300px), -50%, 0) scale(0.6); }
     /* Estilos para carrusel horizontal */
-    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item { width: 320px; height: 180px; }
-    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.left { transform: translate3d(calc(-50% - 200px), -50%, 0) scale(0.85); }
-    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.right { transform: translate3d(calc(-50% + 200px), -50%, 0) scale(0.85); }
-    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.hidden-left { transform: translate3d(calc(-50% - 350px), -50%, 0) scale(0.6); }
-    .blogger-wrapper-final .preview-images-carousel.horizontal-mode .screenshot-item.hidden-right { transform: translate3d(calc(-50% + 350px), -50%, 0) scale(0.6); }
-
+   .blogger-wrapper-final .screenshot-item.orient-horizontal { width: 320px; height: 180px; }
+    .blogger-wrapper-final .screenshot-item.orient-vertical { width: 180px; height: 320px; }
     .blogger-wrapper-final .video-container {
         position: relative; width: 100%; padding-bottom: 56.25%; height: 0; margin-top: 10px; margin-bottom: 20px;
         border: 3px solid var(--color-neon-cyan); box-shadow: 0 0 15px var(--color-neon-cyan); border-radius: 8px; overflow: hidden;
@@ -345,17 +339,7 @@
                                                 
        .blogger-wrapper-final .download-button.option-1 { background: linear-gradient(135deg, #00ffaa 0%, #000000 100%) !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(0, 255, 170, 0.5) !important; border: 2px solid var(--neon-green) !important; }
     .blogger-wrapper-final .download-button.option-2 { background: var(--color-neon-cyan) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-cyan) !important; border: 2px solid var(--color-neon-cyan) !important; }
-    .blogger-wrapper-final .download-button.option-3 { background: var(--color-neon-lime) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-lime) !important; border: 2px solid var(--color-neon-lime) !important; }     
-
-    /* Ajuste dinámico con CSS: Si el botón 3 no está o está oculto (solo hay 2 botones), reasignamos los colores */
-    .app-download-buttons:has(#btn-download-3[style*="none"]) .download-button.option-1,
-    .app-download-buttons:not(:has(#btn-download-3)) .download-button.option-1 {
-        background: var(--color-neon-cyan) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-cyan) !important; border: 2px solid var(--color-neon-cyan) !important;
-    }
-    .app-download-buttons:has(#btn-download-3[style*="none"]) .download-button.option-2,
-    .app-download-buttons:not(:has(#btn-download-3)) .download-button.option-2 {
-        background: var(--color-neon-lime) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-lime) !important; border: 2px solid var(--color-neon-lime) !important;
-    }
+    .blogger-wrapper-final .download-button.option-3 { background: var(--color-neon-lime) !important; background-image: none !important; color: #000000 !important; box-shadow: 0 0 15px var(--color-neon-lime) !important; border: 2px solid var(--color-neon-lime) !important; }               
 
     /* Clases para resaltar texto como en el ejemplo */
     .hl-red { color: #ff0000; font-weight: 900; }
@@ -400,14 +384,18 @@
     </div>
 
       <div id="admin-modal" class="admin-modal">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px;">
+   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px;">
             <h3 style="margin:0; border:none; padding:0;"><i class="fa-solid fa-user-gear"></i> PANEL DE CONTROL</h3>
-            <i class="fa-solid fa-xmark" style="color:#fff; font-size:20px; cursor:pointer;" onclick="closeAdmin()"></i>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <i class="fa-solid fa-right-from-bracket" title="Cerrar Sesión" style="color:var(--neon-red); font-size:18px; cursor:pointer;" onclick="logoutAdmin()"></i>
+                <i class="fa-solid fa-xmark" style="color:#fff; font-size:20px; cursor:pointer;" onclick="closeAdmin()"></i>
+            </div>
         </div>
         
         <div style="display:flex; gap:10px; margin-bottom:15px;">
-            <button onclick="document.getElementById('admin-tab-apps').style.display='block'; document.getElementById('admin-tab-site').style.display='none';" style="flex:1; padding:8px; background:var(--neon-blue); border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Apps/Apks</button>
-            <button onclick="document.getElementById('admin-tab-apps').style.display='none'; document.getElementById('admin-tab-site').style.display='block';" style="flex:1; padding:8px; background:var(--neon-purple); border:none; border-radius:5px; color:#fff; font-weight:bold; cursor:pointer;">Diseño/Sitio</button>
+            <button onclick="document.getElementById('admin-tab-apps').style.display='block'; document.getElementById('admin-tab-site').style.display='none'; document.getElementById('admin-tab-analytics').style.display='none';" style="flex:1; padding:8px; background:var(--neon-blue); border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Apps/Apks</button>
+            <button onclick="document.getElementById('admin-tab-apps').style.display='none'; document.getElementById('admin-tab-site').style.display='block'; document.getElementById('admin-tab-analytics').style.display='none';" style="flex:1; padding:8px; background:var(--neon-purple); border:none; border-radius:5px; color:#fff; font-weight:bold; cursor:pointer;">Diseño/Sitio</button>
+            <button onclick="document.getElementById('admin-tab-apps').style.display='none'; document.getElementById('admin-tab-site').style.display='none'; document.getElementById('admin-tab-analytics').style.display='block'; if(window.loadAnalyticsData) window.loadAnalyticsData();" style="flex:1; padding:8px; background:var(--neon-green); border:none; border-radius:5px; color:#000; font-weight:bold; cursor:pointer;">Analíticas</button>
         </div>
 
         <div id="admin-tab-apps" class="admin-form">
@@ -475,6 +463,11 @@
             <span class="admin-group-label">INSTRUCCIONES INSTALACIÓN</span>
             <textarea id="app-install-steps" rows="5" placeholder="Pasos de instalación (Dejar vacío para usar predeterminado)"></textarea>
                              <span class="admin-group-label">ENLACES DE DESCARGA</span>
+                                         <div style="display:flex; align-items:center; margin-bottom:15px; background: rgba(255,20,147,0.1); padding: 10px; border-radius: 8px; border: 1px solid var(--neon-pink);">
+                <input type="checkbox" id="app-coming-soon" style="width:20px; height:20px; margin:0 10px 0 0; cursor:pointer; accent-color: var(--neon-red);">
+                <label for="app-coming-soon" style="font-size:13px; color:#fff; cursor:pointer; font-weight:bold; width:100%;">Mostrar mensaje "Próximamente" (Oculta botones de descarga)</label>
+            </div>
+
             <div id="admin-downloads-container"></div>
             <button onclick="const totalBtns = document.querySelectorAll('#admin-downloads-container input[type=\'text\']').length / 2; const nextTitle = totalBtns === 0 ? 'DESCARGA RECOMENDABLE' : (totalBtns === 1 ? 'DESCARGA ALTERNATIVO' : 'DESCARGA ALTERNATIVO ' + (totalBtns + 1)); if(typeof addDownloadInput === 'function') { addDownloadInput(nextTitle, ''); }" style="background:#333; color:#fff; border:none; padding:8px; border-radius:5px; width:100%; cursor:pointer; font-size:11px; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> AÑADIR OTRO BOTÓN</button>
                       
@@ -519,10 +512,17 @@
             
             <label style="font-size:10px; color:#aaa; margin-top:10px;">Video 2 (Página de Resultados)</label>
             <input type="text" id="site-video-2" placeholder="URL SRC del iframe (Ej: https://www.youtube.com/embed/...)">
-            
+            <label style="font-size:10px; color:#aaa; margin-top:10px;">Video 3 (Predeterminado si la App no tiene video propio)</label>
+            <input type="text" id="site-video-3" placeholder="URL SRC del iframe (Ej: https://www.youtube.com/embed/...)">
+             
              <label style="font-size:10px; color:#aaa; margin-top:10px;">Mensaje Evangelio (Efecto Máquina)</label>
             <input type="text" id="site-notice" placeholder="Ej: Jesús es la resurrección y la vida">
-
+            <label style="font-size:10px; color:#aaa; margin-top:10px;">Título Notificación Evangelio</label>
+            <input type="text" id="site-notice-title" placeholder="Ej: Mensaje de Salvación">
+            <label style="font-size:10px; color:#aaa; margin-top:10px;">Imagen Notificación Evangelio (URL)</label>
+            <input type="text" id="site-notice-image" placeholder="URL de la imagen para esta notificación">
+            <label style="font-size:10px; color:#aaa; margin-top:10px;">Enlace al hacer clic (Evangelio)</label>
+            <input type="text" id="site-notice-link" placeholder="Ej: https://tu-enlace.com">
             <label style="font-size:10px; color:#aaa; margin-top:10px;">Correo para recibir Reportes</label>
             <input type="email" id="site-email" placeholder="Ej: tu-correo@gmail.com">
 
@@ -534,7 +534,8 @@
             <input type="text" id="site-youtube" placeholder="Ej: https://youtube.com/...">
                         <label style="font-size:10px; color:#aaa; margin-top:10px;">Enlace App Oficial ZonaTecno</label>
             <input type="text" id="site-zonatecno-app" placeholder="Ej: https://mediafire.com/tu-app.apk">
-
+            <label style="font-size:10px; color:#aaa; margin-top:10px;">Imagen App Oficial ZonaTecno (URL)</label>
+            <input type="text" id="site-zonatecno-app-image" placeholder="URL de la imagen/ícono para esta notificación">
                                    <label style="font-size:10px; color:#aaa; margin-top:10px;">Preguntas Frecuentes (Soporta HTML)</label>
             <textarea id="site-faq" rows="6" placeholder="Pega aquí el código HTML de tus preguntas frecuentes (Ej: <div class='faq-category'>...)"></textarea>
 
@@ -547,6 +548,15 @@
 
                 <button class="btn-cancel" onclick="closeAdmin()">Cancelar</button>
                 <button class="btn-save" style="background:var(--neon-purple);" onclick="saveSiteConfig()">GUARDAR SITIO</button>
+            </div>
+        </div>
+
+        <div id="admin-tab-analytics" class="admin-form" style="display:none;">
+            <span class="admin-group-label">RESUMEN DE CLICS EN DESCARGAS</span>
+            <div id="analytics-summary" style="margin-bottom:15px;"><p style="color:#888; font-size:12px;">Abre esta pestaña para cargar los datos.</p></div>
+            <button onclick="if(window.loadAnalyticsData) window.loadAnalyticsData();" style="background:var(--neon-green); color:#000; border:none; padding:8px; border-radius:5px; width:100%; cursor:pointer; font-size:11px; font-weight:bold; margin-bottom:10px;"><i class="fa-solid fa-arrows-rotate"></i> ACTUALIZAR ANALÍTICAS</button>
+            <div class="admin-btns">
+                <button class="btn-cancel" onclick="closeAdmin()">Cancelar</button>
             </div>
         </div>
     </div>
@@ -884,29 +894,7 @@
                         </div>
 
                                                 <div class="preview-images-carousel" id="coverflow-wrapper">
-                            </div>
-                        <script>
-                            // Auto-ajustar orientación del carrusel basado en la proporción de la imagen
-                            const checkCarouselOrientation = () => {
-                                const wrapper = document.getElementById('coverflow-wrapper');
-                                if(wrapper) {
-                                    const img = wrapper.querySelector('.screenshot-item img');
-                                    if(img) {
-                                        const updateOrientation = () => {
-                                            if(img.naturalWidth > img.naturalHeight) {
-                                                wrapper.classList.add('horizontal-mode');
-                                            } else {
-                                                wrapper.classList.remove('horizontal-mode');
-                                            }
-                                        };
-                                        if(img.complete) updateOrientation();
-                                        else img.addEventListener('load', updateOrientation);
-                                    }
-                                }
-                            };
-                            new MutationObserver(checkCarouselOrientation).observe(document.getElementById('coverflow-wrapper'), { childList: true });
-                        </script>
-
+                            </div>                                                  
 
                         <div class="section-title-divider">
                             <h3>DESCRIPCIÓN COMPLETA</h3>
@@ -985,7 +973,20 @@
                             <h3>OPCIONES DE DESCARGA</h3>
                         </div>
                                                      <div class="download-box">
-                                                      <div class="app-download-buttons">
+                                                        <div id="coming-soon-box" style="display:none; text-align:center; padding: 25px 15px; border: 2px solid var(--neon-red); border-radius: 12px; background: rgba(255,51,51,0.05); box-shadow: 0 0 20px rgba(255,51,51,0.3);">
+                                                            <h2 style="color: var(--neon-red); font-family: 'Rajdhani', sans-serif; font-size: 2.5em; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; line-height: 1; text-shadow: 0 0 10px rgba(255,51,51,0.5);">¡PRÓXIMAMENTE!</h2>
+                                                            <p style="color: #fff; font-size: 1.05em; margin-bottom: 25px; text-align: center !important; font-weight: 700; line-height: 1.4;">Suscríbete al canal para estar enterado de las novedades o únete al canal de WhatsApp.</p>
+                                                            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                                                                <a id="btn-coming-youtube" href="#" target="_blank" style="text-decoration: none; flex: 1; min-width: 140px; background: #FF0000; color: #fff; padding: 12px; border-radius: 8px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 0 15px rgba(255,0,0,0.5); text-transform: uppercase; transition: transform 0.2s;">
+                                                                    <i class="fab fa-youtube" style="font-size: 1.3em;"></i> YouTube
+                                                                </a>
+                                                                <a id="btn-coming-whatsapp" href="#" target="_blank" style="text-decoration: none; flex: 1; min-width: 140px; background: #25D366; color: #fff; padding: 12px; border-radius: 8px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 0 15px rgba(37,211,102,0.5); text-transform: uppercase; transition: transform 0.2s;">
+                                                                    <i class="fab fa-whatsapp" style="font-size: 1.3em;"></i> WhatsApp
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                      <div class="app-download-buttons" id="regular-download-buttons">
+                                                     
                                 <a id="btn-download-rec" href="#" target="_blank" class="download-button option-1">DESCARGA RECOMENDABLE</a>
                                 <a id="btn-download-alt" href="#" target="_blank" class="download-button option-2">DESCARGA ALTERNATIVO</a>
                                 <a id="btn-download-3" href="#" target="_blank" class="download-button option-3" style="display:none;">DESCARGA ALTERNATIVO 2</a>
@@ -1198,6 +1199,43 @@
         
         <div class='spacer-bottom'></div>
     </main>
+        
+        <script>
+        // Lógica para el sistema "Próximamente"
+        function aplicarConfiguracionProximamente(activado) {
+            const comingSoonBox = document.getElementById('coming-soon-box');
+            const regularButtons = document.getElementById('regular-download-buttons');
+            const btnYoutube = document.getElementById('btn-coming-youtube');
+            const btnWhatsapp = document.getElementById('btn-coming-whatsapp');
+            
+            // Obtener los enlaces globales configurados en el panel de Diseño/Sitio
+            const linkYoutube = document.getElementById('site-youtube').value || '#';
+            const linkWhatsapp = document.getElementById('site-whatsapp').value || '#';
+            
+            if (activado) {
+                // Si está ACTIVADO: Mostrar recuadro Próximamente y ocultar descargas
+                comingSoonBox.style.display = 'block';
+                regularButtons.style.display = 'none';
+                
+                // Inyectar los enlaces en los botones
+                btnYoutube.href = linkYoutube;
+                btnWhatsapp.href = linkWhatsapp;
+            } else {
+                // Si está DESACTIVADO: Ocultar recuadro Próximamente y mostrar descargas normales
+                comingSoonBox.style.display = 'none';
+                regularButtons.style.display = 'block';
+            }
+        }
+
+        // Evento para que el panel de administración responda en tiempo real al cambiar el interruptor
+        const appComingSoonSwitch = document.getElementById('app-coming-soon');
+        if (appComingSoonSwitch) {
+            appComingSoonSwitch.addEventListener('change', function() {
+                aplicarConfiguracionProximamente(this.checked);
+            });
+        }
+    </script>
+
     <nav class='bottom-nav'>
         <a class='nav-item active' href='#' onclick="showHome()" id="nav-home">
             <i class='fa-solid fa-house'></i><span>Inicio</span>
@@ -1285,8 +1323,9 @@
     <script type="module">
                
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, get, child, remove, update, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+       
+        import { getDatabase, ref, push, get, child, remove, update, set, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCUVvr1gaFze1O_4n5i4-5OKfD1nh0kYpM",
@@ -1305,6 +1344,114 @@
         let allApps = []; 
         let isAdminMode = false; 
         let coverflowInterval = null;
+        function getDateKey(d = new Date()) {
+            return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,'0') + "-" + String(d.getDate()).padStart(2,'0');
+        }
+        async function logAppView(appId) {
+            try {
+                const today = getDateKey();
+                await update(ref(database, "analytics/appViews/" + appId), { [today]: increment(1), total: increment(1) });
+            } catch(e) { console.error("Error registrando vista:", e); }
+        }
+        async function logDownloadClick(appId) {
+            try {
+                const today = getDateKey();
+                await update(ref(database, "analytics/downloads/" + appId), { [today]: increment(1), total: increment(1) });
+            } catch(e) { console.error("Error registrando clic:", e); }
+        }
+        window.loadAnalyticsData = async function() {
+            const summaryEl = document.getElementById('analytics-summary');
+            summaryEl.innerHTML = "<p style='color:#888; font-size:12px;'>Cargando analíticas...</p>";
+            try {
+                const dlSnap = await get(child(ref(database), "analytics/downloads"));
+                const dlData = dlSnap.exists() ? dlSnap.val() : {};
+
+                const today = new Date();
+                const todayKey = getDateKey(today);
+                const last7Keys = [];
+                const last30Keys = [];
+                for(let i=0; i<30; i++) {
+                    const d = new Date(today);
+                    d.setDate(d.getDate() - i);
+                    const k = getDateKey(d);
+                    last30Keys.push(k);
+                    if(i < 7) last7Keys.push(k);
+                }
+
+                let totalToday = 0, totalWeek = 0, totalMonth = 0;
+                let perAppRows = "";
+
+                for(let appId in dlData) {
+                    const appEntry = dlData[appId];
+                    const appInfo = allApps.find(a => a.id === appId);
+                    const appName = appInfo ? appInfo.title : appId;
+                    let appToday = appEntry[todayKey] || 0;
+                    let appWeek = 0, appMonth = 0;
+                    last7Keys.forEach(k => appWeek += (appEntry[k] || 0));
+                    last30Keys.forEach(k => appMonth += (appEntry[k] || 0));
+                    totalToday += appToday;
+                    totalWeek += appWeek;
+                    totalMonth += appMonth;
+                    perAppRows += `<div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:5px; padding:8px 0; border-bottom:1px solid #333; font-size:11px;">
+                        <span style="color:#fff; font-weight:bold; width:100%;">${appName}</span>
+                        <span style="color:var(--neon-green);">Hoy: ${appToday}</span>
+                        <span style="color:var(--neon-blue);">7 días: ${appWeek}</span>
+                        <span style="color:var(--neon-yellow);">30 días: ${appMonth}</span>
+                    </div>`;
+                }
+
+                let dailyRows = "";
+                last7Keys.forEach(k => {
+                    let dayTotal = 0;
+                    for(let appId in dlData) { dayTotal += (dlData[appId][k] || 0); }
+                    dailyRows += `<div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #333; font-size:12px;"><span style="color:#ccc;">${k}</span><span style="color:var(--neon-green); font-weight:bold;">${dayTotal} clics</span></div>`;
+                });
+
+                summaryEl.innerHTML = `
+                    <div style="display:flex; gap:10px; margin-bottom:15px;">
+                        <div style="flex:1; background:rgba(0,255,170,0.1); border:1px solid var(--neon-green); border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:20px; font-weight:900; color:var(--neon-green);">${totalToday}</div>
+                            <div style="font-size:10px; color:#aaa;">CLICS HOY</div>
+                        </div>
+                        <div style="flex:1; background:rgba(0,224,255,0.1); border:1px solid var(--neon-blue); border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:20px; font-weight:900; color:var(--neon-blue);">${totalWeek}</div>
+                            <div style="font-size:10px; color:#aaa;">CLICS 7 DÍAS</div>
+                        </div>
+                        <div style="flex:1; background:rgba(255,243,0,0.1); border:1px solid var(--neon-yellow); border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:20px; font-weight:900; color:var(--neon-yellow);">${totalMonth}</div>
+                            <div style="font-size:10px; color:#aaa;">CLICS 30 DÍAS</div>
+                        </div>
+                    </div>
+                    <span class="admin-group-label">CLICS POR APP (DESCARGAS)</span>
+                    ${perAppRows || "<p style='color:#888; font-size:12px;'>Sin datos aún.</p>"}
+                    <span class="admin-group-label">CLICS POR DÍA (ÚLTIMOS 7 DÍAS)</span>
+                    ${dailyRows}
+                `;
+            } catch(e) {
+                summaryEl.innerHTML = "<p style='color:var(--neon-red);'>Error al cargar analíticas: " + e.message + "</p>";
+            }
+        };
+        // Detectar sesión activa de Firebase automáticamente (no pide contraseña de nuevo)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                isAdminMode = true;
+            } else if (localStorage.getItem('zt_admin_local') !== '1') {
+                isAdminMode = false;
+            }
+        });
+
+        // Detectar sesión activa en Modo Local (archivo abierto directamente en el celular)
+        if (localStorage.getItem('zt_admin_local') === '1') {
+            isAdminMode = true;
+        }
+
+        window.logoutAdmin = async function() {
+            try { await signOut(auth); } catch(e) {}
+            localStorage.removeItem('zt_admin_local');
+            isAdminMode = false;
+            closeAdmin();
+            showToast("Sesión cerrada correctamente");
+        }
         // --- NAVEGACIÓN (CON HISTORIAL PARA BOTÓN ATRÁS) ---
         window.switchView = function(viewId, skipHistory = false) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
@@ -1366,10 +1513,18 @@
         window.showFaq = function() { switchView('faq-view'); }
 
         // --- LOGICA DETALLE APP + CARRUSEL ---
+        function setText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = value;
+        }
+        function setImg(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.src = value;
+        }
         window.viewAppDetails = function(appId) {
             const app = allApps.find(a => a.id === appId);
             if(!app) return;
-
+            logAppView(appId);
                                  // 1. INYECTAR DATOS DE TEXTO
             setText('detail-title', app.title);
             setText('detail-cat-header', app.category || 'GENERAL');
@@ -1458,11 +1613,17 @@
                 let currentLinkType = d.dlType || (d.useAds === false ? 'direct' : (app.showAdModal === false ? 'direct' : app.downloadType || 'cuty'));
                 const isDirect = (currentLinkType === 'direct');
                         
-                a.href = isDirect ? d.link : "#";
+               a.href = isDirect ? d.link : "#";
                 if(isDirect) a.target = "_blank";
                 a.innerText = d.name;
-                a.className = "download-button " + (i % 2 === 0 ? "option-1" : "option-2");
-
+                let colorClass;
+                if (dls.length >= 3) {
+                    colorClass = (i === 0) ? "option-1" : (i % 2 === 0 ? "option-3" : "option-2");
+                } else {
+                    colorClass = (i % 2 === 0) ? "option-2" : "option-3";
+                }
+                a.className = "download-button " + colorClass;
+                a.addEventListener('click', () => { logDownloadClick(app.id); });
                                 if(!isDirect) {
                     a.onclick = (e) => { 
                         e.preventDefault(); 
@@ -1481,12 +1642,12 @@
 
                 dlContainer.appendChild(a);
             });
-
      
             // Video
                         
-            const vidFrame = document.getElementById('detail-video-frame');
+           const vidFrame = document.getElementById('detail-video-frame');
             if(app.video && app.video.trim() !== "") vidFrame.src = app.video;
+            else if(window.globalVideo3 && window.globalVideo3.trim() !== "") vidFrame.src = window.globalVideo3;
             else vidFrame.src = "about:blank";
                       // Version Antigua
             const otherVerSection = document.querySelector('.other-versions-section');
@@ -1512,7 +1673,8 @@
                     a.style.marginBottom = "8px";
                     a.style.fontWeight = "bold";
                                        a.style.color = (i % 2 === 0) ? "var(--color-neon-lime)" : "var(--color-neon-cyan)";
-                                                                                              const isDirectOld = (app.showAdModal === false && app.downloadType !== 'ads');
+                    a.addEventListener('click', () => { logDownloadClick(app.id); });
+                                       const isDirectOld = (app.showAdModal === false && app.downloadType !== 'ads');
                                         if(isDirectOld) {
                         a.href = v.link;
                         a.target = "_blank";
@@ -1545,12 +1707,54 @@
             // 3. INICIAR CARRUSEL
             initCoverflow(app.carousel || "");
 
+            // Aplicar el estado de "Próximamente" INDEPENDIENTE para esta app específica
+            aplicarConfiguracionProximamente(app.comingSoon === true);
+
             switchView('app-detail-view');
         }
 
-        function setText(id, txt) { const el = document.getElementById(id); if(el) el.innerText = txt; }
-        function setImg(id, src) { const el = document.getElementById(id); if(el) el.src = src; }
+       // Función centralizada para mostrar cualquier notificación (uso global, mismo diseño para todas)
+        window.showNotif = function(title, subtitle, img, clickHandler) {
+            const notif = document.getElementById('app-update-notification');
+            if (!notif) return;
 
+            document.getElementById('update-notif-icon').src = img || "https://cdn-icons-png.flaticon.com/512/104/104663.png";
+            document.getElementById('update-notif-title').innerText = title;
+            notif.querySelector('p').innerHTML = `<i class="fa-solid fa-bell fa-shake"></i> ${subtitle}`;
+
+            notif.onclick = function() {
+                notif.style.top = '-150px';
+                notif.style.opacity = '0';
+                if(clickHandler) clickHandler();
+            };
+
+            notif.style.top = '25px';
+            notif.style.opacity = '1';
+
+            setTimeout(() => {
+                notif.style.top = '-150px';
+                notif.style.opacity = '0';
+            }, 10000);
+        };
+
+        // Notificaciones informativas: Evangelio, YouTube y WhatsApp (rotan solas, sin botones, arriba igual que las demás)
+        window.startInfoNotifications = function() {
+            const infoIcon = "https://cdn-icons-png.flaticon.com/512/104/104663.png";
+            const ytIcon = "https://cdn-icons-png.flaticon.com/512/1384/1384060.png";
+            const waIcon = "https://cdn-icons-png.flaticon.com/512/124/124034.png";
+            const infoItems = [
+                () => window.showNotif(window.globalNoticeTitle && window.globalNoticeTitle.trim() !== "" ? window.globalNoticeTitle : "Mensaje de Salvación", window.globalNotice || "Jesús es la resurrección y la vida", (window.globalNoticeImage && window.globalNoticeImage.trim() !== "") ? window.globalNoticeImage : infoIcon, (window.globalNoticeLink && window.globalNoticeLink.trim() !== "") ? () => window.open(window.globalNoticeLink, '_blank') : null),
+                () => window.showNotif("Canal Oficial de YouTube", "¡Suscríbete para estar al tanto de las novedades!", ytIcon, (window.globalYoutube && window.globalYoutube.trim() !== "") ? () => window.open(window.globalYoutube, '_blank') : null),
+                () => window.showNotif("Canal Oficial de WhatsApp", "¡Únete a nuestro canal de WhatsApp!", waIcon, (window.globalWhatsapp && window.globalWhatsapp.trim() !== "") ? () => window.open(window.globalWhatsapp, '_blank') : null)
+            ];
+            let infoIndex = 0;
+            const cycleInfo = () => {
+                infoItems[infoIndex % infoItems.length]();
+                infoIndex++;
+                setTimeout(cycleInfo, 45000);
+            };
+            setTimeout(cycleInfo, 20000);
+        };
         // --- CARRUSEL LOGICA ---
         function initCoverflow(imagesStr) {
             const wrapper = document.getElementById('coverflow-wrapper');
@@ -1562,15 +1766,26 @@
                 images = imagesStr.split(',').map(s => s.trim()).filter(s => s !== "");
             }
             
-            if(images.length === 0) {
-                wrapper.innerHTML = "<p style='text-align:center; padding-top:150px; color:#555;'>Sin capturas</p>";
+           if(images.length === 0) {
+                wrapper.innerHTML = "<div class='screenshot-item center' style='background: linear-gradient(160deg, var(--color-neon-cyan) 0%, rgba(0,0,0,0.85) 70%); display:flex; align-items:center; justify-content:center; text-align:center; padding: 20px;'><p style='color:#fff; font-weight:900; font-size:1em; text-transform:uppercase; text-shadow: 0 0 10px rgba(0,0,0,0.8);'>En proceso Proximamente siguenos en nuestras redes para no perderte nada </p></div>";
                 return;
             }
-
-            images.forEach(src => {
+           images.forEach(src => {
                 const div = document.createElement('div');
                 div.className = 'screenshot-item';
                 div.innerHTML = `<img src="${src}" onerror="this.style.display='none'">`;
+                const imgEl = div.querySelector('img');
+                const applyOrientation = () => {
+                    if(imgEl.naturalWidth > imgEl.naturalHeight) {
+                        div.setAttribute('data-orient', 'orient-horizontal');
+                    } else {
+                        div.setAttribute('data-orient', 'orient-vertical');
+                    }
+                    div.classList.remove('orient-horizontal', 'orient-vertical');
+                    div.classList.add(div.getAttribute('data-orient'));
+                };
+                if(imgEl.complete && imgEl.naturalWidth > 0) applyOrientation();
+                else imgEl.addEventListener('load', applyOrientation);
                 wrapper.appendChild(div);
             });
 
@@ -1583,7 +1798,8 @@
                     if (offset > total / 2) offset -= total;
                     if (offset < -total / 2) offset += total;
                     
-                    card.className = 'screenshot-item'; 
+                    const orient = card.getAttribute('data-orient');
+                    card.className = 'screenshot-item' + (orient ? ' ' + orient : ''); 
                     if (offset === 0) card.classList.add('center');
                     else if (offset === -1) card.classList.add('left');
                     else if (offset === 1) card.classList.add('right');
@@ -1625,34 +1841,11 @@
                 if (!window.notificationSystemStarted && allApps.length > 0) {
                     window.notificationSystemStarted = true;
 
-                    // Función centralizada para mostrar cualquier notificación
-                    const showNotif = (title, subtitle, img, clickHandler) => {
-                        const notif = document.getElementById('app-update-notification');
-                        if (!notif) return;
-                        
-                        document.getElementById('update-notif-icon').src = img || "https://cdn-icons-png.flaticon.com/512/104/104663.png";
-                        document.getElementById('update-notif-title').innerText = title;
-                        notif.querySelector('p').innerHTML = `<i class="fa-solid fa-bell fa-shake"></i> ${subtitle}`;
-                        
-                        notif.onclick = function() {
-                            notif.style.top = '-150px';
-                            notif.style.opacity = '0';
-                            if(clickHandler) clickHandler();
-                        };
-                        
-                        notif.style.top = '25px';
-                        notif.style.opacity = '1';
-                        
-                        setTimeout(() => {
-                            notif.style.top = '-150px';
-                            notif.style.opacity = '0';
-                        }, 10000);
-                    };
-
+                    
                     // TIEMPO 1: 30 segundos (App Oficial ZonaTecno o Respaldo)
                     setTimeout(() => {
                         if(window.zonaTecnoAppUrl && window.zonaTecnoAppUrl.trim() !== "") {
-                            showNotif("App Oficial ZonaTecno", "¡Descárgala ahora!", "https://cdn-icons-png.flaticon.com/512/104/104663.png", () => {
+                            showNotif("App Oficial ZonaTecno", "¡Descárgala ahora!", (window.zonaTecnoAppImage && window.zonaTecnoAppImage.trim() !== "") ? window.zonaTecnoAppImage : "https://cdn-icons-png.flaticon.com/512/104/104663.png", () => {
                                 window.open(window.zonaTecnoAppUrl, '_blank');
                             });
                         } else {
@@ -1679,7 +1872,7 @@
                         });
                     }, 90000);
 
-                    // BUCLE: Inicia a los 150 segundos y se repite cada 60 segundos
+           // BUCLE: Inicia a los 120 segundos y se repite cada 30 segundos
                     let loopCount = 0;
                     const startInfiniteLoop = () => {
                         const isRecent = (loopCount % 2 === 0); 
@@ -1691,10 +1884,10 @@
                         });
                         
                         loopCount++;
-                        setTimeout(startInfiniteLoop, 60000);
+                        setTimeout(startInfiniteLoop, 30000);
                     };
                     
-                    setTimeout(startInfiniteLoop, 150000);
+                    setTimeout(startInfiniteLoop, 120000);
                 }
 
                     const urlParams = new URLSearchParams(window.location.search);
@@ -1821,12 +2014,13 @@
                             
                 color1: document.getElementById('app-color-1').value,
                 color2: document.getElementById('app-color-2').value,
-                                installSteps: document.getElementById('app-install-steps') ? document.getElementById('app-install-steps').value : "",
+installSteps: document.getElementById('app-install-steps') ? document.getElementById('app-install-steps').value : "",
                 postType: document.querySelector('input[name="post-type"]:checked') ? document.querySelector('input[name="post-type"]:checked').value : 'apk',
                                 showAdModal: document.getElementById('app-show-ad-modal') ? document.getElementById('app-show-ad-modal').checked : true,
                 downloadType: document.querySelector('input[name="app-download-type"]:checked') ? document.querySelector('input[name="app-download-type"]:checked').value : 'cuty',
+                comingSoon: document.getElementById('app-coming-soon') ? document.getElementById('app-coming-soon').checked : false,
                 timestamp: Date.now()
-            };
+            };                                
 
                         if(!data.title) return showToast("Error: Falta el título de la App", true);
 
@@ -1865,6 +2059,7 @@
 
                         document.getElementById('app-ver-old-active').checked = app.oldVerActive || false;
             if(document.getElementById('app-show-ad-modal')) document.getElementById('app-show-ad-modal').checked = (app.showAdModal !== false);
+            if(document.getElementById('app-coming-soon')) document.getElementById('app-coming-soon').checked = (app.comingSoon === true);
             if(app.downloadType === 'ads') {
                 if(document.querySelector('input[name="app-download-type"][value="ads"]')) document.querySelector('input[name="app-download-type"][value="ads"]').checked = true;
             } else {
@@ -1963,8 +2158,9 @@
             addOldVersionInput("Versión 1.0", "");
                         
                           if(document.getElementById('app-show-ad-modal')) document.getElementById('app-show-ad-modal').checked = true;
+            if(document.getElementById('app-coming-soon')) document.getElementById('app-coming-soon').checked = false;
             if(document.querySelector('input[name="post-type"][value="apk"]')) document.querySelector('input[name="post-type"][value="apk"]').checked = true;
-            if(document.querySelector('input[name="app-download-type"][value="cuty"]')) document.querySelector('input[name="app-download-type"][value="cuty"]').checked = true;
+             if(document.querySelector('input[name="app-download-type"][value="cuty"]')) document.querySelector('input[name="app-download-type"][value="cuty"]').checked = true;
             if(window.togglePostType) window.togglePostType();
                 document.getElementById('login-modal').style.display = 'none';
 
@@ -1991,6 +2187,7 @@
             if(location.protocol === 'file:') {
                 if(pass === "rapers275dk") {
                     isAdminMode = true;
+                    localStorage.setItem('zt_admin_local', '1');
                     showToast("Acceso concedido (Modo Local)");
                     openPanel();
                 } else {
@@ -1998,7 +2195,6 @@
                 }
                 return;
             }
-
             if (!email || !pass) return showToast("Llena correo y contraseña", true);
             const btn = document.querySelector('#login-modal .btn-save');
             btn.innerText = "...";
@@ -2031,13 +2227,18 @@
                     const data = configSnap.val();
                     if(document.getElementById('site-video-1')) document.getElementById('site-video-1').value = data.video1 || "";
                     if(document.getElementById('site-video-2')) document.getElementById('site-video-2').value = data.video2 || "";
+                    if(document.getElementById('site-video-3')) document.getElementById('site-video-3').value = data.video3 || "";
                      if(document.getElementById('site-notice')) document.getElementById('site-notice').value = data.notice || "";
+                    if(document.getElementById('site-notice-title')) document.getElementById('site-notice-title').value = data.noticeTitle || "";
+                    if(document.getElementById('site-notice-image')) document.getElementById('site-notice-image').value = data.noticeImage || "";
+                    if(document.getElementById('site-notice-link')) document.getElementById('site-notice-link').value = data.noticeLink || "";
                     if(document.getElementById('site-email')) document.getElementById('site-email').value = data.reportEmail || "";
                     if(document.getElementById('site-whatsapp')) document.getElementById('site-whatsapp').value = data.whatsapp || "";
                    
                     if(document.getElementById('site-youtube')) document.getElementById('site-youtube').value = data.youtube || "";
                        if(document.getElementById('site-zonatecno-app')) document.getElementById('site-zonatecno-app').value = data.zonaTecnoAppUrl || "";
-                 if(document.getElementById('site-faq')) document.getElementById('site-faq').value = data.faq || "";
+                    if(document.getElementById('site-zonatecno-app-image')) document.getElementById('site-zonatecno-app-image').value = data.zonaTecnoAppImage || ""; 
+                    if(document.getElementById('site-faq')) document.getElementById('site-faq').value = data.faq || "";
                     if(document.getElementById('site-analytics')) document.getElementById('site-analytics').value = data.analytics || "";
                 }
             } catch(e) { console.error("Error cargando config", e); }
@@ -2046,16 +2247,21 @@
                 window.saveSiteConfig = async function() {
             const btn = document.querySelector('#admin-tab-site .btn-save');
             btn.innerText = "Guardando...";
-            const data = {
-                video1: window.getYouTubeEmbedUrl(document.getElementById('site-video-1').value),
+           const data = {
+               video1: window.getYouTubeEmbedUrl(document.getElementById('site-video-1').value),
                 video2: window.getYouTubeEmbedUrl(document.getElementById('site-video-2').value),
+                video3: window.getYouTubeEmbedUrl(document.getElementById('site-video-3').value),
                 notice: document.getElementById('site-notice').value,
+                noticeTitle: document.getElementById('site-notice-title') ? document.getElementById('site-notice-title').value : "",
+                noticeImage: document.getElementById('site-notice-image') ? document.getElementById('site-notice-image').value : "",
+                noticeLink: document.getElementById('site-notice-link') ? document.getElementById('site-notice-link').value : "",
 
                 reportEmail: document.getElementById('site-email').value,
                 whatsapp: document.getElementById('site-whatsapp').value,
                
                 youtube: document.getElementById('site-youtube').value,
                                 zonaTecnoAppUrl: document.getElementById('site-zonatecno-app') ? document.getElementById('site-zonatecno-app').value : "",
+                zonaTecnoAppImage: document.getElementById('site-zonatecno-app-image') ? document.getElementById('site-zonatecno-app-image').value : "",
 
                 faq: document.getElementById('site-faq').value,
                 analytics: document.getElementById('site-analytics').value
@@ -2073,8 +2279,9 @@
             const v2 = document.querySelector('.video-section iframe[title="Guía de Descarga"]');
             const vTimerLink = document.getElementById('timer-video-link');
             const vTimerThumb = document.getElementById('timer-video-thumb');
-            if(v1 && data.video1) v1.src = data.video1;
+          if(v1 && data.video1) v1.src = data.video1;
             if(v2 && data.video2) v2.src = data.video2;
+            if(data.video3) window.globalVideo3 = data.video3;
             if(vTimerLink && data.video2) {
                 let match = data.video2.match(/\/embed\/([^?]+)/);
                 if(match) {
@@ -2085,10 +2292,13 @@
                 }
             }
                         
-            if(data.notice) {
+           if(data.notice) {
                 window.globalNotice = data.notice;
                 if(window.restartTyping) window.restartTyping();
             }
+            window.globalNoticeTitle = data.noticeTitle || "";
+            window.globalNoticeImage = data.noticeImage || "";
+            window.globalNoticeLink = data.noticeLink || "";
                if(data.reportEmail && data.reportEmail.trim() !== "") {
                 document.querySelectorAll('form[action^="https://formsubmit.co/"]').forEach(f => f.action = "https://formsubmit.co/" + data.reportEmail.trim());
             }
@@ -2098,15 +2308,19 @@
                 const detailWaBtn = document.querySelector('.social-button.whatsapp');
                 if(waBtn) waBtn.href = data.whatsapp;
                 if(detailWaBtn) detailWaBtn.href = data.whatsapp;
+                window.globalWhatsapp = data.whatsapp;
             }
             if(data.youtube) {
                 const ytBtn = document.getElementById('bottom-nav-yt');
                 if(ytBtn) ytBtn.href = data.youtube;
+                window.globalYoutube = data.youtube;
             }
                         if(data.zonaTecnoAppUrl) {
                 window.zonaTecnoAppUrl = data.zonaTecnoAppUrl;
             }
-
+            if(data.zonaTecnoAppImage) {
+                window.zonaTecnoAppImage = data.zonaTecnoAppImage;
+            }
             if(data.faq && data.faq.trim() !== "") {
                 const faqContainer = document.getElementById('dynamic-faq-container');
                 if(faqContainer) faqContainer.innerHTML = data.faq;
@@ -2397,9 +2611,9 @@ window.open('https://omg10.com/4/10744381', '_blank');
             }
         });
 
-        loadAppsFromFirebase();
+       loadAppsFromFirebase();
+        window.startInfoNotifications();
     </script>
-
     <script>
         // Toggle Menu
         window.toggleMenu = function() {
