@@ -1325,7 +1325,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
        
         import { getDatabase, ref, push, get, child, remove, update, set, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      import { getAuth, signInWithEmailAndPassword, signInAnonymously, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"; 
 
         const firebaseConfig = {
             apiKey: "AIzaSyCUVvr1gaFze1O_4n5i4-5OKfD1nh0kYpM",
@@ -1432,14 +1432,17 @@
             }
         };
         // Detectar sesión activa de Firebase automáticamente (no pide contraseña de nuevo)
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
+       onAuthStateChanged(auth, (user) => {
+            if (user && !user.isAnonymous) {
                 isAdminMode = true;
             } else if (localStorage.getItem('zt_admin_local') !== '1') {
                 isAdminMode = false;
             }
         });
-
+        
+// Autenticación silenciosa para visitantes normales (no administradores)
+        // Esto permite que sus clics de descarga y vistas SÍ se guarden en las analíticas.
+        signInAnonymously(auth).catch((e) => console.error("Error de autenticación anónima:", e));
         // Detectar sesión activa en Modo Local (archivo abierto directamente en el celular)
         if (localStorage.getItem('zt_admin_local') === '1') {
             isAdminMode = true;
@@ -2355,7 +2358,7 @@ installSteps: document.getElementById('app-install-steps') ? document.getElement
             modal.style.display = 'block';
             overlay.classList.add('active');
             
-            let timeLeft = 10;
+           let timeLeft = 60;
 countEl.innerText = timeLeft;
 textEl.innerText = timeLeft;
             const timer = setInterval(() => {
