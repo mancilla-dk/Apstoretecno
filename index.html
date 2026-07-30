@@ -1291,11 +1291,11 @@
         <p style="font-size:13px; color:#fff; margin-bottom:10px; line-height:1.4;">Estás a punto de ser redirigido a tu enlace de descarga. <span style="color:var(--neon-red); font-weight:bold;">Este proceso es 100% seguro.</span></p>
         <p style="font-size:11px; color:#aaa; margin-bottom:10px; line-height:1.4;">⚠️ Utilizamos los acortadores de publicidad para mantener este sitio web activo y seguir trayéndote aplicaciones premium.</p>
         <p style="font-size:12px; color:var(--neon-blue); font-weight:bold; margin-bottom:15px; line-height:1.4;"><i class="fa-solid fa-circle-info"></i> Si te cuesta o no sabes saltar la publicidad, por favor mira el <span style="color:var(--neon-yellow);">video de ayuda</span> que se encuentra agregado abajo en los botones de descarga.</p>
-        
-        <div style="font-size:42px; font-weight:900; color:var(--neon-green); margin-bottom:5px; text-shadow: 0 0 15px var(--neon-green);" id="dl-countdown">60</div>
+               
+<div style="font-size:42px; font-weight:900; color:var(--neon-green); margin-bottom:5px; text-shadow: 0 0 15px var(--neon-green);" id="dl-countdown">30</div>
 
-        <p style="font-size:13px; color:var(--neon-green); font-weight:bold; margin-bottom: 15px;">Redirigiendo automáticamente en <span id="dl-countdown-text">60</span> segundos...</p>
-        
+<p style="font-size:13px; color:var(--neon-green); font-weight:bold; margin-bottom: 15px;">Redirigiendo automáticamente en <span id="dl-countdown-text">30</span> segundos...</p>
+               
         <a id="btn-acceso-directo" href="#" target="_blank" style="display:inline-block; background:var(--neon-green); color:#000; padding:12px 20px; border-radius:5px; font-weight:bold; text-decoration:none; margin-top:10px; box-shadow: 0 0 10px var(--neon-green);"><i class="fa-solid fa-forward-step"></i> ACCESO DIRECTO (CUTY)</a>
     </div>
 
@@ -2358,7 +2358,7 @@ installSteps: document.getElementById('app-install-steps') ? document.getElement
             modal.style.display = 'block';
             overlay.classList.add('active');
             
-           let timeLeft = 60;
+           let timeLeft = 30;
 countEl.innerText = timeLeft;
 textEl.innerText = timeLeft;
             const timer = setInterval(() => {
